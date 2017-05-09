@@ -12,8 +12,7 @@ UCLASS()
 class CYCLISTVR_API ACyclistVRGameMode : public AGameMode
 {
 	GENERATED_BODY()
-	
-	
-	
+
+		
 	
 };
