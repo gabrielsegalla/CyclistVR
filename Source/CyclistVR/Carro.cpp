@@ -17,7 +17,7 @@ ACarro::ACarro()
 	MeshComp = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComp"));
 	MeshComp->SetCollisionProfileName("BlockAll");
 	MeshComp->SetWorldRotation(FRotator(0.0f, 90.0f, 0.0f));
-	MeshComp->SetWorldScale3D(FVector(1.5f, 1.5f, 1.5f));
+	MeshComp->SetWorldScale3D(FVector(0.21875f, 0.21875f, 0.21875f));
 
 	ConstructorHelpers::FObjectFinder<USkeletalMesh>
 		Mesh(TEXT("SkeletalMesh'/Game/FBX/carro/carrro3.carrro3'"));
@@ -44,7 +44,7 @@ void ACarro::Tick(float DeltaTime)
 	//velocidade = Root->GetComponentLocation().X - 1;
 	//Root->SetWorldLocation(velocidade, Root->GetWorldLocation(), z);
 	FVector ActualLocation = Root->GetComponentLocation();
-	ActualLocation.X -= 15;
+	ActualLocation.X -= 5;
 	Root->SetWorldLocation(ActualLocation);
 
 }

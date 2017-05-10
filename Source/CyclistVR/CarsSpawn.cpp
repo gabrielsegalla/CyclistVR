@@ -36,27 +36,28 @@ void ACarsSpawn::Tick(float DeltaTime)
 void ACarsSpawn::SpawCars() {
 	UWorld * World = GetWorld();
 	if (World != nullptr) {
+
 		float LocationX = 5014.0f;
-		float LocationZ = 1182.0f;
+		float LocationZ = 7.0f;
 
 
 
-		Ramdom = FMath::RandRange(0, 1);
+		Ramdom = FMath::RandRange(0, 7);
 		UE_LOG(LogTemp, Warning, TEXT("Random: %d"), Ramdom);
 		FActorSpawnParameters SpawParameters;
 
 		if (Ramdom == 1) {
-			FVector Location(LocationX, 119.0f, LocationZ);
+			FVector Location(LocationX, 0.0f, LocationZ);
 			ACarro * carro = World->SpawnActor<ACarro>(Location, FRotator::ZeroRotator, SpawParameters);
-			LocationX += 1000.0f;
+			LocationX += 5000.0f;
 			CountCarsToSpawn++;
 			UE_LOG(LogTemp, Warning, TEXT("carro 1"));
 		}
 
 		else if (Ramdom == 0) {
-			FVector Location(LocationX, 235.0f, LocationZ);
+			FVector Location(LocationX, -20.0f, LocationZ);
 			ACarro * carro = World->SpawnActor<ACarro>(Location, FRotator::ZeroRotator, SpawParameters);
-			LocationX += 1000.0f;
+			LocationX += 5000.0f;
 			CountCarsToSpawn++;
 			UE_LOG(LogTemp, Warning, TEXT("carro 2"));
 		}
