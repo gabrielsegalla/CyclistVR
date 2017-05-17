@@ -32,4 +32,7 @@ private:
 
 	UPROPERTY(EditAnywhere)
 		float velocidade;
+
+	
+
 };

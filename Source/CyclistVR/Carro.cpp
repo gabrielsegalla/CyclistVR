@@ -11,11 +11,11 @@ ACarro::ACarro()
 	PrimaryActorTick.bCanEverTick = true;
 
 	Root = CreateDefaultSubobject<UBoxComponent>(TEXT("Root"));
-	Root->SetCollisionProfileName("OverlapAllDynamic");
+	Root->SetCollisionProfileName("BlockAllDynamic");
 	RootComponent = Root;
 
 	MeshComp = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComp"));
-	MeshComp->SetCollisionProfileName("BlockAll");
+	MeshComp->SetCollisionProfileName("NoCollision");
 	MeshComp->SetWorldRotation(FRotator(0.0f, 90.0f, 0.0f));
 	MeshComp->SetWorldScale3D(FVector(0.21875f, 0.21875f, 0.21875f));
 
@@ -48,4 +48,5 @@ void ACarro::Tick(float DeltaTime)
 	Root->SetWorldLocation(ActualLocation);
 
 }
+
 
