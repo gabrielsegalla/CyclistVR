@@ -25,6 +25,15 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		int GetLife();
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		void SetLife(int NewLife);
+
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		FVector GetPlayerLocation();
+
+
 private:
 
 	UPROPERTY(EditAnywhere)
@@ -35,9 +44,8 @@ private:
 		int Life = 100;
 	UPROPERTY(EditAnywhere)
 		int Quilometragem;	
-
 	UFUNCTION()
 		void RotateHead();
-	UFUNCTION()
-		void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+	
+	
 };

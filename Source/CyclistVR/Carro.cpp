@@ -2,16 +2,20 @@
 
 #include "CyclistVR.h"
 #include "Carro.h"
+#include "CharacterVR.h"
 
 
 // Sets default values
 ACarro::ACarro()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	Root = CreateDefaultSubobject<UBoxComponent>(TEXT("Root"));
-	Root->SetCollisionProfileName("BlockAllDynamic");
+	Root->bGenerateOverlapEvents = true;
+	Root->SetCollisionProfileName("OverlapAllDynamic");
+	Root->OnComponentBeginOverlap.AddDynamic(this, &ACarro::OnOverlapBegin);
+
 	RootComponent = Root;
 
 	MeshComp = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComp"));
@@ -34,7 +38,7 @@ ACarro::ACarro()
 void ACarro::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 // Called every frame
@@ -49,4 +53,12 @@ void ACarro::Tick(float DeltaTime)
 
 }
 
+void ACarro::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 
+	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherActor->IsA(ACharacterVR::StaticClass())) {
+
+		ACharacterVR* Char = Cast<ACharacterVR>(OtherActor);
+		Char->SetLife(0);
+	}
+
+}

@@ -12,7 +12,9 @@ ACharacterVR::ACharacterVR()
 	PrimaryActorTick.bCanEverTick = true;
 
 	GetCapsuleComponent()->SetCollisionProfileName("BlockAllDynamic");
-	GetCapsuleComponent()->OnComponentHit.AddDynamic(this, &ACharacterVR::OnHit);
+
+
+
 
 	PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("PlayerCamera"));
 	GetMesh()->SetupAttachment(PlayerCamera);
@@ -25,17 +27,20 @@ ACharacterVR::ACharacterVR()
 void ACharacterVR::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	
+
+
 }
 
 // Called every frame
 void ACharacterVR::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	FVector NewLocation(GetCapsuleComponent()->GetComponentLocation().X + 5, GetCapsuleComponent()->GetComponentLocation().Y, GetCapsuleComponent()->GetComponentLocation().Z);
-	GetCapsuleComponent()->SetWorldLocation(NewLocation);
-	RotateHead();
+	if (Life != 0) {
+		FVector NewLocation(GetCapsuleComponent()->GetComponentLocation().X + 5, GetCapsuleComponent()->GetComponentLocation().Y, GetCapsuleComponent()->GetComponentLocation().Z);
+		GetCapsuleComponent()->SetWorldLocation(NewLocation);
+		RotateHead();
+	}
+
 
 
 }
@@ -50,23 +55,28 @@ void ACharacterVR::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 void ACharacterVR::RotateHead() {
 	float Rotate = PlayerCamera->GetComponentRotation().Yaw;
 	if (Rotate < -5) {
-		FVector NewLocation(GetCapsuleComponent()->GetComponentLocation().X, GetCapsuleComponent()->GetComponentLocation().Y -2, GetCapsuleComponent()->GetComponentLocation().Z);
+		FVector NewLocation(GetCapsuleComponent()->GetComponentLocation().X, GetCapsuleComponent()->GetComponentLocation().Y - 2, GetCapsuleComponent()->GetComponentLocation().Z);
 		GetCapsuleComponent()->SetWorldLocation(NewLocation);
-	}else if(Rotate > 5){
+	}
+	else if (Rotate > 5) {
 		FVector NewLocation(GetCapsuleComponent()->GetComponentLocation().X, GetCapsuleComponent()->GetComponentLocation().Y + 2, GetCapsuleComponent()->GetComponentLocation().Z);
 		GetCapsuleComponent()->SetWorldLocation(NewLocation);
-	}else {
+	}
+	else {
 
 	}
 }
 
-void ACharacterVR::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) {
-	if (OtherActor != nullptr &&
-		OtherActor->IsA(ACarro::StaticClass()) &&
-		OtherComp != nullptr) {
 
-		UE_LOG(LogTemp, Warning, TEXT("ATROPELADO"));
 
-	}
+int ACharacterVR::GetLife() {
+	return Life;
 }
 
+void ACharacterVR::SetLife(int NewLife) {
+	Life = NewLife;
+}
+
+FVector ACharacterVR::GetPlayerLocation() {
+	return GetCapsuleComponent()->GetComponentLocation();
+}
