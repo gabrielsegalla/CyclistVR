@@ -12,9 +12,17 @@ ACharacterVR::ACharacterVR()
 	PrimaryActorTick.bCanEverTick = true;
 
 	GetCapsuleComponent()->SetCollisionProfileName("BlockAllDynamic");
+	ConstructorHelpers::FObjectFinder<USoundCue>SoundCue(TEXT("SoundCue'/Game/songs/sucess_Cue.sucess_Cue'"));
+	
+	if (SoundCue.Succeeded()) {
+		level = SoundCue.Object;
+	}
 
+	AudioComp = CreateDefaultSubobject<UAudioComponent>(TEXT("AudioComp"));
+	AudioComp->bAutoActivate = false;
 
-
+	AudioComp->SetSound(level);
+	
 
 	PlayerCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("PlayerCamera"));
 	GetMesh()->SetupAttachment(PlayerCamera);
@@ -36,12 +44,14 @@ void ACharacterVR::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	if (Life != 0) {
-		FVector NewLocation(GetCapsuleComponent()->GetComponentLocation().X + 5, GetCapsuleComponent()->GetComponentLocation().Y, GetCapsuleComponent()->GetComponentLocation().Z);
+		SetQuilometragem(GetQuilometragem() + 5);
+		FVector NewLocation(GetCapsuleComponent()->GetComponentLocation().X + GetVelocidade(), GetCapsuleComponent()->GetComponentLocation().Y, GetCapsuleComponent()->GetComponentLocation().Z);
 		GetCapsuleComponent()->SetWorldLocation(NewLocation);
+		UE_LOG(LogTemp, Warning, TEXT("KM: %d"),Quilometragem);
 		RotateHead();
 	}
 
-
+	
 
 }
 
@@ -53,6 +63,19 @@ void ACharacterVR::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 }
 
 void ACharacterVR::RotateHead() {
+
+	if (GetQuilometragem() == 10000) {
+		SetVelocidade(GetVelocidade() + 5);
+		UE_LOG(LogTemp, Warning, TEXT("DIFICULDADE 2"));
+		UE_LOG(LogTemp, Warning, TEXT("VELOCIDADE: %d"), Velocidade);
+		AudioComp->Play();
+	}
+	else if (GetQuilometragem() == 20000) {
+		SetVelocidade(GetVelocidade() + 5);
+		UE_LOG(LogTemp, Warning, TEXT("DIFICULDADE 3"));
+		UE_LOG(LogTemp, Warning, TEXT("VELOCIDADE: %d"), Velocidade);
+		AudioComp->Play();
+	}
 	float Rotate = PlayerCamera->GetComponentRotation().Yaw;
 	if (Rotate < -5) {
 		FVector NewLocation(GetCapsuleComponent()->GetComponentLocation().X, GetCapsuleComponent()->GetComponentLocation().Y - 2, GetCapsuleComponent()->GetComponentLocation().Z);
@@ -80,3 +103,34 @@ void ACharacterVR::SetLife(int NewLife) {
 FVector ACharacterVR::GetPlayerLocation() {
 	return GetCapsuleComponent()->GetComponentLocation();
 }
+
+int ACharacterVR::GetQuilometragem() {
+	return Quilometragem;
+}
+
+void ACharacterVR::SetQuilometragem(int NewQuilometragem) {
+	Quilometragem = NewQuilometragem;
+}
+
+int ACharacterVR::GetVelocidade() {
+	return Velocidade;
+}
+
+void ACharacterVR::SetVelocidade(int NewVelocidade) {
+	Velocidade = NewVelocidade;
+}
+
+void ACharacterVR::RestartGame() {
+	FVector InitialLocation(71.999939f, 0.0f, 116.669983f);
+	SetLife(100);
+	SetQuilometragem(0);
+	SetVelocidade(5);
+	GetCapsuleComponent()->SetWorldLocation(InitialLocation);
+
+
+}
+
+
+
+
+

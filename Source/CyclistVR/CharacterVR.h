@@ -32,10 +32,19 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Player")
 		FVector GetPlayerLocation();
-
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		int GetQuilometragem();
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		void SetQuilometragem(int NewQuilometragem);
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		int GetVelocidade();
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		void SetVelocidade(int NewVelocidade);
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		void RestartGame();
 
 private:
-
+	// BlueprintReadWrite || BlueprintReadOnly
 	UPROPERTY(EditAnywhere)
 		UStaticMeshComponent* MeshComp;
 	UPROPERTY(EditAnywhere)
@@ -43,9 +52,14 @@ private:
 	UPROPERTY(EditAnywhere)
 		int Life = 100;
 	UPROPERTY(EditAnywhere)
-		int Quilometragem;	
+		int Quilometragem = 0;
+	UPROPERTY(EditAnywhere)
+		int Velocidade = 5;
 	UFUNCTION()
 		void RotateHead();
-	
+	UPROPERTY(EditAnywhere)
+		USoundCue *level;
+	UPROPERTY(EditAnywhere)
+		UAudioComponent *AudioComp;
 	
 };

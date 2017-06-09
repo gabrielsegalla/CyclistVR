@@ -14,7 +14,6 @@ AHttpActor::AHttpActor()
 // Called when the game starts or when spawned
 void AHttpActor::BeginPlay()
 {
-	MyHttpCall();
 	Super::BeginPlay();
 }
 

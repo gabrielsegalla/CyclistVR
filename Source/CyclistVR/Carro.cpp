@@ -15,16 +15,17 @@ ACarro::ACarro()
 	Root->bGenerateOverlapEvents = true;
 	Root->SetCollisionProfileName("OverlapAllDynamic");
 	Root->OnComponentBeginOverlap.AddDynamic(this, &ACarro::OnOverlapBegin);
-
+	Root->SetWorldScale3D(FVector(0.412219f, 0.368846f, 0.330663f));
 	RootComponent = Root;
 
 	MeshComp = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComp"));
 	MeshComp->SetCollisionProfileName("NoCollision");
+	MeshComp->SetWorldLocation(FVector(0.0f, 0.0f, -33.266502f));
 	MeshComp->SetWorldRotation(FRotator(0.0f, 90.0f, 0.0f));
-	MeshComp->SetWorldScale3D(FVector(0.21875f, 0.21875f, 0.21875f));
+	MeshComp->SetWorldScale3D(FVector(1.127806f, 0.966449f, 1.28775f));
 
 	ConstructorHelpers::FObjectFinder<USkeletalMesh>
-		Mesh(TEXT("SkeletalMesh'/Game/FBX/carro/carrro3.carrro3'"));
+		Mesh(TEXT("SkeletalMesh'/Game/FBX/VRCYCLE_3D/carro/carrro3.carrro3'"));
 
 	if (Mesh.Succeeded()) {
 		MeshComp->SetSkeletalMesh(Mesh.Object);
@@ -56,7 +57,6 @@ void ACarro::Tick(float DeltaTime)
 void ACarro::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherActor->IsA(ACharacterVR::StaticClass())) {
-
 		ACharacterVR* Char = Cast<ACharacterVR>(OtherActor);
 		Char->SetLife(0);
 	}
