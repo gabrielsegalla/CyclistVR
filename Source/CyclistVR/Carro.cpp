@@ -49,7 +49,7 @@ void ACarro::Tick(float DeltaTime)
 	//velocidade = Root->GetComponentLocation().X - 1;
 	//Root->SetWorldLocation(velocidade, Root->GetWorldLocation(), z);
 	FVector ActualLocation = Root->GetComponentLocation();
-	ActualLocation.X -= 5;
+	ActualLocation.X -= 3;
 	Root->SetWorldLocation(ActualLocation);
 
 }

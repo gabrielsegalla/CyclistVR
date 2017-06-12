@@ -30,7 +30,9 @@ void APessoaSpawn::BeginPlay()
 void APessoaSpawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	APawn* Pawn = UGameplayStatics::GetPlayerPawn(this, 0);
+	ACharacterVR* vrchar = Cast<ACharacterVR>(Pawn);
+	levelProgress = vrchar->GetQuilometragem();
 }
 
 void APessoaSpawn::SpawPessoas() {
@@ -43,8 +45,18 @@ void APessoaSpawn::SpawPessoas() {
 		float LocationZ = 7.0f;
 
 
-
-		Ramdom = FMath::RandRange(0, 7);
+		if (levelProgress < 10000) {
+			Ramdom = FMath::RandRange(0, 8);
+			UE_LOG(LogTemp, Warning, TEXT("Random: %d"), Ramdom);
+		}
+		else if (levelProgress > 10001 && levelProgress < 20000) {
+			Ramdom = FMath::RandRange(0, 6);
+			UE_LOG(LogTemp, Warning, TEXT("Random: %d"), Ramdom);
+		}
+		else if (levelProgress > 20000) {
+			Ramdom = FMath::RandRange(0, 3);
+			UE_LOG(LogTemp, Warning, TEXT("Random: %d"), Ramdom);
+		}
 		//UE_LOG(LogTemp, Warning, TEXT("Random: %d"), Ramdom);
 		FActorSpawnParameters SpawParameters;
 

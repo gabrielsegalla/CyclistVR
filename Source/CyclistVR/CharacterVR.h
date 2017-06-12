@@ -42,6 +42,11 @@ public:
 		void SetVelocidade(int NewVelocidade);
 	UFUNCTION(BlueprintCallable, Category = "Player")
 		void RestartGame();
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		int GetDesempenho();
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		void SetDesempenho(int NewDesempenho);
+
 
 private:
 	// BlueprintReadWrite || BlueprintReadOnly
@@ -61,5 +66,7 @@ private:
 		USoundCue *level;
 	UPROPERTY(EditAnywhere)
 		UAudioComponent *AudioComp;
+	UPROPERTY(EditAnywhere)
+		int Desempenho = 100;
 	
 };

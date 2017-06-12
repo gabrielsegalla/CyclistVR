@@ -37,6 +37,7 @@ private:
 
 	UFUNCTION()
 		void  SpawPessoas();
-
+	UPROPERTY(EditAnywhere)
+		int levelProgress;
 	
 };
