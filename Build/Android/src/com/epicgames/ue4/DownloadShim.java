@@ -1,7 +1,7 @@
 package com.epicgames.ue4;
 
-import com.senai.cyclistv2r.OBBDownloaderService;
-import com.senai.cyclistv2r.DownloaderActivity;
+import com.segalla.vrcycle.OBBDownloaderService;
+import com.segalla.vrcycle.DownloaderActivity;
 
 
 public class DownloadShim

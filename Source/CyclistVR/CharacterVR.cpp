@@ -68,12 +68,12 @@ void ACharacterVR::RotateHead() {
 		SetVelocidade(GetVelocidade() + 5);
 		AudioComp->Play();
 	}
-	else if (GetQuilometragem() == 10000) {
+	else if (GetQuilometragem() == 100000) {
 		SetVelocidade(GetVelocidade() + 5);
 		AudioComp->Play();
 	}
-	//float Rotate = PlayerCamera->GetComponentRotation().Roll;
-	float Rotate = PlayerCamera->GetComponentRotation().Yaw;
+	float Rotate = PlayerCamera->GetComponentRotation().Roll;
+	//float Rotate = PlayerCamera->GetComponentRotation().Yaw;
 	if (Rotate < -5) {
 		FVector NewLocation(GetCapsuleComponent()->GetComponentLocation().X, GetCapsuleComponent()->GetComponentLocation().Y - 2, GetCapsuleComponent()->GetComponentLocation().Z);
 		GetCapsuleComponent()->SetWorldLocation(NewLocation);

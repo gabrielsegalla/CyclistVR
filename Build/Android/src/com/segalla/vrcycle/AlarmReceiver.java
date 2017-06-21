@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.senai.cyclistv2r;
+package com.segalla.vrcycle;
 
 import com.google.android.vending.expansion.downloader.DownloaderClientMarshaller;
 

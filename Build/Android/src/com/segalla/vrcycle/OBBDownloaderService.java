@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.senai.cyclistv2r;
+package com.segalla.vrcycle;
 
 import com.google.android.vending.expansion.downloader.impl.DownloaderService;
 
@@ -61,6 +61,6 @@ public class OBBDownloaderService extends DownloaderService {
      */
     @Override
     public String getAlarmReceiverClassName() {
-        return com.senai.cyclistv2r.AlarmReceiver.class.getName();
+        return com.segalla.vrcycle.AlarmReceiver.class.getName();
     }
 }

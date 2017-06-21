@@ -1,4 +1,4 @@
-package com.senai.cyclistv2r;
+package com.segalla.vrcycle;
 
 public class OBBData
 {
@@ -17,7 +17,7 @@ public static final XAPKFile[] xAPKS = {
 new XAPKFile(
 true, // true signifies a main file
 "1", // the version of the APK that the file was uploaded against
-314997146L // the length of the file in bytes
+47172898L // the length of the file in bytes
 )
 };
 };
